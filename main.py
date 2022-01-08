@@ -10,16 +10,18 @@ def handle_arp_packet(packet):
     if packet[ARP].op == 1:
         print_red('ARP Request:')
         print(packet.summary())
-        print(f"Vendor mac: {get_mac_vendor(packet[Ether].src)}")
+        print(f"Vendor mac: {packet[Ether].src}")
+        print(f"Vendor: {get_mac_vendor(packet[Ether].src)}")
     elif packet[ARP].op == 2:
         print_green('ARP Reply:')
         print(packet.summary())
-        print(f"Vendor mac: {get_mac_vendor(packet[Ether].src)}")
+        print(f"Vendor mac: {packet[Ether].src}")
+        print(f"Vendor: {get_mac_vendor(packet[Ether].src)}")
     return
 
 
 def get_interfaces():
-    return IFACES.data.keys()
+    return list(IFACES.data.keys())
 
 
 if __name__ == "__main__":
